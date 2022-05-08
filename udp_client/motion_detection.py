@@ -16,7 +16,6 @@ class MotionDetection:
 
     def handle_motion(self):
         while True:
-            print('entré')
             motion = 0
             check, frame = self.camera.read()
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
