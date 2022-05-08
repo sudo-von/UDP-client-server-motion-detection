@@ -11,7 +11,7 @@ if __name__ == '__main__':
 
     server_ip = os.getenv("SERVER_IP") or "127.0.0.1"
     server_port = os.getenv("SERVER_PORT") or 20000
-    buffer_size = os.getenv("BUFFER_SIZE") or 1024
+    buffer_size = os.getenv("BUFFER_SIZE") or 100000000
 
     udp_client_log = UDPClientLog()
     udp_client = UDPClient(server_ip, server_port, buffer_size, udp_client_log)
@@ -19,9 +19,8 @@ if __name__ == '__main__':
 
     motion_detection_log = MotionDetectionLog()
     motion_detection = MotionDetection(motion_detection_log)
-    motion_detection.open_camera(2)
+    motion_detection.open_camera(0)
 
     service_log = ServiceLog()
     service = Service(udp_client, motion_detection, service_log, 15)
     service.start()
-    

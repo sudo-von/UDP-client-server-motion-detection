@@ -14,7 +14,7 @@ class UDPClient:
         self.log_service.log_socket()
 
     def receive_packets(self):
-        message_from_server = self.socket.recvfrom(int(self.buffer_size)*2)
+        message_from_server = self.socket.recvfrom(self.buffer_size)
         self.log_service.log_server_response(message_from_server[0])
 
     def send_packets(self, bytes_to_send):
