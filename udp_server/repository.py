@@ -5,12 +5,12 @@ from datetime import datetime
 class Repository:
 
     def store(self, data):
-        datetime = datetime.now().strftime("%d-%m-%Y %H:%M:%S").split(' ')
-        date, time = datetime
+        date_time = datetime.now().strftime("%d-%m-%Y %H:%M:%S").split(' ')
+        date, time = date_time
 
         dirPath = f"{os.getcwd()}/images/{date}"
         dirExist = os.path.exists(dirPath)
-        if !dirExist:
+        if not dirExist:
             os.makedirs(dirPath)
 
         filePath = f"{dirPath}/{time}.png"

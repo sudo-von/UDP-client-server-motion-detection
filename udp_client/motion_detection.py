@@ -39,4 +39,9 @@ class MotionDetection:
         
 
     def get_frame_bytes(self, frame):
-        return cv2.imencode('.jpg', frame)[1].tobytes()
+        scale_percent = 50
+        width = int(frame.shape[1] * scale_percent / 100)
+        height = int(frame.shape[0] * scale_percent / 100)
+        dsize = (width, height)
+        output = cv2.resize(frame, dsize)
+        return cv2.imencode('.jpg', output)[1].tobytes()
