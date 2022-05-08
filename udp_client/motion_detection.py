@@ -13,7 +13,7 @@ class MotionDetection:
             exit()
         self.log_service.log_camera()
 
-    def detect_movement(self):
+    def handle_motion(self):
         static_back = None
         while True:
             motion = 0
@@ -35,24 +35,7 @@ class MotionDetection:
                     continue
                 motion = 1
         
-            self.draw_rectangle(frame, contour)
-            self.show_frames(gray, diff_frame, thresh_frame, frame)
-            self.handle_exit(cv2.waitKey(1))
+            return self.get_frame_bytes(frame)
 
-    def show_frames(self, gray, diff_frame, thresh_frame, frame):
-        cv2.imshow("Gray frame", gray)
-        cv2.imshow("Difference frame", diff_frame)
-        cv2.imshow("Threshold frame", thresh_frame)
-        cv2.imshow("Color frame", frame)
-
-    def draw_rectangle(self, frame, contour):
-        (x, y, w, h) = cv2.boundingRect(contour)
-        cv2.rectangle(frame, (x, y), (x + w, y + h), (0, 255, 0), 3)
-        image_bytes = cv2.imencode('.jpg', frame)[1].tobytes()
-        print(len(image_bytes))
-        print("movimiento detectado eprro")
-
-    def handle_exit(self, key):
-        if key == ord('q'):
-            self.camera.release()
-            exit()
+    def get_frame_bytes(self, frame):
+        return cv2.imencode('.jpg', frame)[1].tobytes()

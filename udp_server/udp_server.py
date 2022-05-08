@@ -20,7 +20,7 @@ class UDPServer:
             bytes_address_pair = self.socket.recvfrom(self.buffer_size)
             message, address = bytes_address_pair
             self.log_server.log_client(message, address)
-            self.send_packets(str.encode("test"), address)
+            self.send_packets(str.encode("Bytes received successfuly"), address)
 
     def send_packets(self, bytes_to_send, address):
         self.socket.sendto(bytes_to_send, address)
