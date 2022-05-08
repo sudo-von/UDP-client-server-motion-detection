@@ -17,7 +17,7 @@ class UDPServer:
 
     def receive_packets(self):
         while(True):
-            bytes_address_pair = self.socket.recvfrom(self.buffer_size)
+            bytes_address_pair = self.socket.recvfrom(int(self.buffer_size)*2)
             message, address = bytes_address_pair
             self.log_server.log_client(message, address)
             self.send_packets(str.encode("Bytes received successfuly"), address)
