@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.3'
 services:
   udp_server:
     container_name: motion_detection_udp_server
