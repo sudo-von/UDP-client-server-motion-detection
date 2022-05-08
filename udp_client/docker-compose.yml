@@ -5,9 +5,9 @@ services:
     restart: always
     build: 
       context: .
+    devices:
+      - "/dev/video0:/dev/video0"
     environment:
       SERVER_IP: ${SERVER_IP}
       SERVER_PORT: ${SERVER_PORT}
       BUFFER_SIZE: ${BUFFER_SIZE}
-    ports:
-      - 20000:20000

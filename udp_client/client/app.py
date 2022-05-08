@@ -10,8 +10,8 @@ from service_log import ServiceLog
 if __name__ == '__main__':
 
     server_ip = os.getenv("SERVER_IP") or "127.0.0.1"
-    server_port = os.getenv("SERVER_PORT") or 20000
-    buffer_size = os.getenv("BUFFER_SIZE") or 100000000
+    server_port = int(os.getenv("SERVER_PORT")) or 20000
+    buffer_size = int(os.getenv("BUFFER_SIZE")) or 100000000
 
     udp_client_log = UDPClientLog()
     udp_client = UDPClient(server_ip, server_port, buffer_size, udp_client_log)
