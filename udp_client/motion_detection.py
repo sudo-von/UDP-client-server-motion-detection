@@ -5,6 +5,7 @@ class MotionDetection:
     def __init__(self, log_service):
         self.log_service = log_service
         self.camera = None 
+        self.static_back = None
 
     def open_camera(self, camera_number):
         self.camera = cv2.VideoCapture(camera_number)
@@ -14,18 +15,18 @@ class MotionDetection:
         self.log_service.log_camera()
 
     def handle_motion(self):
-        static_back = None
         while True:
+            print('entré')
             motion = 0
             check, frame = self.camera.read()
             gray = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
             gray = cv2.GaussianBlur(gray, (21, 21), 0)
 
-            if static_back is None:
-                static_back = gray
+            if self.static_back is None:
+                self.static_back = gray
                 continue
 
-            diff_frame = cv2.absdiff(static_back, gray)
+            diff_frame = cv2.absdiff(self.static_back, gray)
             thresh_frame = cv2.threshold(diff_frame, 30, 255, cv2.THRESH_BINARY)[1]
             thresh_frame = cv2.dilate(thresh_frame, None, iterations = 2)
         
@@ -34,8 +35,8 @@ class MotionDetection:
                 if cv2.contourArea(contour) < 10000:
                     continue
                 motion = 1
+                return self.get_frame_bytes(frame)
         
-            return self.get_frame_bytes(frame)
 
     def get_frame_bytes(self, frame):
         return cv2.imencode('.jpg', frame)[1].tobytes()

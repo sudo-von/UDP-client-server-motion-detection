@@ -19,8 +19,8 @@ if __name__ == '__main__':
 
     motion_detection_log = MotionDetectionLog()
     motion_detection = MotionDetection(motion_detection_log)
-    motion_detection.open_camera(0)
+    motion_detection.open_camera(2)
 
     service_log = ServiceLog()
-    service = Service(udp_client, motion_detection, service_log, 15)
+    service = Service(udp_client, motion_detection, service_log, 5)
     service.start()

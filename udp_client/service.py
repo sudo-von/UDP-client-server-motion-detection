@@ -13,4 +13,3 @@ class Service:
         while bytes_to_send:
             bytes_to_send = self.motion_detection.handle_motion()
             self.udp_client.send_packets(bytes_to_send)
-            time.sleep(self.interval)
