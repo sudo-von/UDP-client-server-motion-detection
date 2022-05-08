@@ -1,6 +1,5 @@
 import cv2
 
-
 class MotionDetection:
     def __init__(self, log_service):
         self.log_service = log_service

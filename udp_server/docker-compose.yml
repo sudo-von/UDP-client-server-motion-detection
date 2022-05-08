@@ -1,0 +1,13 @@
+version: '3.8'
+services:
+  udp_server:
+    container_name: motion_detection_udp_server
+    restart: always
+    build: 
+      context: .
+    environment:
+      SERVER_IP: ${SERVER_IP}
+      SERVER_PORT: ${SERVER_PORT}
+      BUFFER_SIZE: ${BUFFER_SIZE}
+    ports:
+      - 20000:20000
